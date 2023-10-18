@@ -14,18 +14,31 @@ export const options: NextAuthOptions = {
         username: { label: "Username", type: "text", placeholder: "你的名字" },
         password: { label: "Password", type: "password", placeholder: "密码" },
       },
-      async authorize(credentials) {
-        const user = { id: "42", name: "test", password: "test" };
+      async authorize(credentials, req) {
+        const res = await fetch("http:/localhost:3000/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: credentials?.username,
+            password: credentials?.password,
+          }),
+        });
 
-        if (
-          credentials?.username === user.name &&
-          credentials?.password === user.password
-        ) {
-          return user;
-        } else {
-          return null;
+        if (res.ok) {
+          const user = await res.json();
+          if (user) {
+            return user;
+          } else {
+            return null;
+          }
         }
       },
     }),
   ],
+
+  // pages: {
+  //   signIn: "/auth/signin",
+  //   signOut: "/auth/signout",
+  //   error: "/auth/error", // Error code passed in query string as ?error=
+  // },
 };
