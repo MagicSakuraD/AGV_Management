@@ -36,12 +36,12 @@ const LoginPage = () => {
         <CardHeader className="space-y-1 ">
           <CardTitle className="text-2xl flex justify-center gap-2">
             <Image src="/logo.png" alt="logo" width={30} height={30} />
-            <p className="text-xl text-muted-foreground">终结者科技</p>
+            <p className="text-xl text-muted-foreground">Terminator</p>
           </CardTitle>
 
           <CardDescription className="pt-8">
             还没有账号？
-            <Link href="api/auth/singup" className="text-blue-600">
+            <Link href="/api/signup" className="text-blue-600">
               立即注册
             </Link>
           </CardDescription>
